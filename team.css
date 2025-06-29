@@ -1,0 +1,141 @@
+:root {
+  --kuning: #F9CC41;
+  --gelap: #262533;
+  --putih: #FFF;
+  --font-abu: #8F8F8F;
+  --border: rgba(255, 255, 255, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--gelap);
+  color: var(--font-abu);
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.gradient-text {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #F9CC41, #FFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: var(--font-abu);
+  margin-top: 10px;
+}
+
+.profile {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #1e1d28;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+}
+
+.profile-img {
+  flex: 1 1 250px;
+  text-align: center;
+}
+
+.profile-img img {
+  width: 220px;
+  height: 220px;
+  border-radius: 100%;
+  object-fit: cover;
+  /* border: 5px solid var(--kuning); -> sudah dihapus */
+}
+
+.profile-info {
+  flex: 2 1 500px;
+}
+
+.profile-info h2 {
+  color: var(--kuning);
+  margin-bottom: 10px;
+}
+
+.profile-info p {
+  margin-bottom: 8px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.buttons a {
+  display: inline-block;
+  background: var(--kuning);
+  color: #262533;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+
+.buttons a:hover {
+  background-color: #e6b82f;
+}
+
+.section {
+  background-color: #1e1d28;
+  margin-top: 50px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+}
+
+.section h2 {
+  color: var(--kuning);
+  margin-bottom: 20px;
+}
+
+.section p {
+  text-align: justify;
+}
+
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--font-abu);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .buttons a {
+    margin-bottom: 10px;
+  }
+}

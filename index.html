@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="login1.css" />
+  <title>Login</title>
+  <style>
+   /* === Loading Overlay === */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #262533, #000); /* Gelap */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+
+.magic-orb {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at center, #FFF, #F9CC41, #F9CC41); /* Putih ke Kuning */
+  border-radius: 50%;
+  box-shadow: 0 0 30px #F9CC41, 0 0 60px #F9CC41 inset; /* Kuning */
+  animation: float 1.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+
+.loading-text {
+  color: #FFF; /* Putih */
+  font-size: 20px;
+  margin-top: 20px;
+  font-family: 'Georgia', serif;
+  letter-spacing: 2px;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.rpg-bar {
+  margin-top: 20px;
+  width: 300px;
+  height: 12px;
+  background: #262533; /* Gelap */
+  border: 2px solid #8F8F8F; /* Abu-abu Font */
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.rpg-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #F9CC41, #FFF); /* Kuning ke Putih */
+  animation: loading-bar 2s linear forwards;
+}
+
+@keyframes loading-bar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+  </style>
+</head>
+<body>
+  <!-- LOADING SCREEN RPG-STYLE -->
+  <div class="loading-overlay" id="loading">
+    <div class="magic-orb"></div>
+    <div class="loading-text">loading...</div>
+    <div class="rpg-bar">
+      <div class="rpg-progress" id="rpg-progress"></div>
+    </div>
+  </div>
+
+  <!-- FORM LOGIN -->
+  <div class="login">
+    <form action="javascript:void(0);" class="login__form" onsubmit="login()">
+      <h1 class="login__title">Login</h1>
+
+      <div class="login__inputs">
+        <div class="login__box">
+          <input type="text" id="username" placeholder="Email ID" required class="login__input" />
+          <i class="ri-mail-fill"></i>
+        </div>
+
+        <div class="login__box">
+          <input type="password" id="password" placeholder="Password" required class="login__input" />
+          <i class="ri-lock-2-fill"></i>
+        </div>
+
+      <div class="login__check">
+        <div class="login__check-box">
+          <input type="checkbox" class="login__check-input" id="user-check" />
+          <label for="user-check" class="login__check-label">Remember me</label>
+        </div>
+      </div>
+
+      <p id="error-msg" style="color: red; text-align: center; margin-bottom: 10px;"></p>
+
+      <button type="submit" class="login__button">Login</button>
+
+      <!-- Link ke halaman register -->
+      <div style="text-align: center; margin-top: 10px; color: white;">
+        Belum punya akun? <a href="register.html" style="color: #00aaff;">Daftar di sini</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- JavaScript Login -->
+  <script>
+    function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const errorMsg = document.getElementById("error-msg");
+  const loading = document.getElementById("loading");
+  const progress = document.getElementById("rpg-progress");
+
+  const registeredUser = localStorage.getItem("registeredUser") || "admin";
+  const registeredPass = localStorage.getItem("registeredPass") || "123456";
+
+  if (username === registeredUser && password === registeredPass) {
+    loading.style.display = "flex";
+    progress.style.width = "0%";
+    progress.style.animation = "loading-bar 2s linear forwards";
+
+    // Tandai bahwa user sudah login
+    localStorage.setItem("isLoggedIn", "true");
+
+    setTimeout(() => {
+      loading.classList.add("fade-out");
+      window.location.href = "beranda.html";
+    }, 2200);
+  } else {
+    errorMsg.textContent = "Username atau password salah!";
+  }
+}
+
+  </script>
+</body>
+</html>

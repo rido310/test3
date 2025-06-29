@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <style>
+   body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #262533; /* Warna gelap */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.register-box {
+  background-color: transparent;
+  border: 1px solid #8F8F8F; /* Warna font */
+  border-radius: 16px;
+  padding: 40px 30px;
+  width: 350px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.register-box h1 {
+  text-align: center;
+  color: #F9CC41; /* Warna kuning */
+  margin-bottom: 30px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.register-box input[type="text"],
+.register-box input[type="password"] {
+  width: 100%;
+  padding: 14px 45px 14px 14px;
+  border: 1px solid #8F8F8F; /* Warna font */
+  border-radius: 50px;
+  background: transparent;
+  color: #FFF; /* Warna putih */
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.register-box input::placeholder {
+  color: #8F8F8F; /* Warna font */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-password img {
+  width: 22px;
+  height: 22px;
+}
+
+.register-box button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 50px;
+  background-color: #F9CC41; /* Warna kuning */
+  color: #262533; /* Warna gelap */
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.register-box button:hover {
+  background-color: #e6b82f; /* Versi hover dari warna kuning */
+}
+
+.register-box .link {
+  text-align: center;
+  margin-top: 20px;
+  color: #8F8F8F; /* Warna font */
+  font-size: 0.95rem;
+}
+
+.register-box .link a {
+  color: #F9CC41; /* Warna kuning */
+  text-decoration: none;
+}
+
+#register-error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#register-success {
+  color: lightgreen;
+  text-align: center;
+  margin-top: 10px;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <h1>Register</h1>
+    <form onsubmit="registerAccount(); return false;">
+      <div class="input-group">
+        <input type="text" id="reg-username" placeholder="Enter Username" required />
+      </div>
+<div class="input-group">
+  <input type="password" id="reg-password" placeholder="Enter Password" required />
+  <span class="toggle-password" onclick="togglePassword('reg-password', this)">
+    <img src="hide.png" alt="Hide Password">
+  </span>
+</div>
+
+<div class="input-group">
+  <input type="password" id="reg-confirm" placeholder="Confirm Password" required />
+  <span class="toggle-password" onclick="togglePassword('reg-confirm', this)">
+    <img src="hide.png" alt="Hide Password">
+  </span>
+</div>
+
+
+      <p id="register-error"></p>
+      <p id="register-success"></p>
+
+      <button type="submit">Register</button>
+
+      <div class="link">
+        Sudah punya akun? <a href="index.html">Login di sini</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function registerAccount() {
+      const username = document.getElementById("reg-username").value.trim();
+      const password = document.getElementById("reg-password").value;
+      const confirm = document.getElementById("reg-confirm").value;
+      const errorMsg = document.getElementById("register-error");
+      const successMsg = document.getElementById("register-success");
+
+      errorMsg.textContent = "";
+      successMsg.textContent = "";
+
+      if (password !== confirm) {
+        errorMsg.textContent = "Password dan konfirmasi tidak cocok!";
+        return;
+      }
+
+      localStorage.setItem("registeredUser", username);
+      localStorage.setItem("registeredPass", password);
+
+      successMsg.textContent = "Registrasi berhasil! Mengarahkan ke login...";
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000);
+    }
+
+    function togglePassword(fieldId, iconElem) {
+    const field = document.getElementById(fieldId);
+    const img = iconElem.querySelector("img");
+
+    if (field.type === "password") {
+      field.type = "text";
+      img.src = "show.png"; // ikon mata terbuka
+      img.alt = "Show Password";
+    } else {
+      field.type = "password";
+      img.src = "hide.png"; // ikon mata tertutup
+      img.alt = "Hide Password";
+    }
+  }
+  </script>
+
+</body>
+</html>
